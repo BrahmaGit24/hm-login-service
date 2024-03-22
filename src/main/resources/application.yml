@@ -1,0 +1,47 @@
+server:
+  port: 5122
+
+spring:
+  datasource:
+    password: bcb@1234
+    driver-class-name: org.postgresql.Driver
+    username: postgres
+    url: jdbc:postgresql://localhost:5432/user-db
+  jpa:
+    properties:
+      hibernate:
+        globally_quoted_identifiers: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+    show-sql: false
+#  security:
+#    crypto:
+#      password:
+#        encoder: BCryptPasswordEncoder
+app:
+  public-key: |
+    -----BEGIN PUBLIC KEY-----
+      MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCX4OJyOwl4NVOdT0icwTn2vo4C
+      dC1fgHFYRmUScXSEvHyvCARCOIPEuGZe85XdU4HuglY7B3OfaYUkohrFSzlZHRib
+      xwXjI45Sp9cznpwT3ijFC5007DANJkEJdjARnYmbWili+LgZDb56a+bKDzZIiXE/
+      79XRvfMThtgopz2oKwIDAQAB
+      -----END PUBLIC KEY-----
+
+security:
+  oauth2:
+    client:
+      clientId: brahma
+      clientSecret: brahma123
+      accessTokenUri: http://localhost:5121/oauth/token
+      user-authorization-uri: http://localhost:5121/auth-service/oauth/authorize
+    resource:
+      token-info-uri: http://localhost:5121/oauth/check_token
+      user-info-uri:  http://localhost:5121/userinfo
+    resourceserver:
+      jwt:
+        issuer-uri: http://localhost:5121/oauth/token
+
+passwordlink-expiry: 24
+otp-expiry: 5
+accessTokenUri: http://localhost:5121/oauth/token
+Auth-credentials : brahma:brahma123
